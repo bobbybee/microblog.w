@@ -11,6 +11,7 @@ handlePOST(url, session, fs, db, query) = dispatch(url):
 profile(username, session, db) = db.users[username].mustache(fs.profile)
 
 login(q, sess, db) = if validAuth(q, db): sess.set(username = q.username)
+                                              .set(authed = true)
                                               .then(profile(sess.username))
                      else:                "Bad login"
 

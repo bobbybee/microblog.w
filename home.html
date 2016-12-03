@@ -1,3 +1,8 @@
 <h1>WINGS thoughts homepage</h1>
 
-<a href="/login">Login</a>
+{{^authed}}
+    <a href="/login">Login</a>
+{{/authed}}
+{{#authed}}
+    Welcome, <a href="/profile/{{username}}">{{username}}</a>!
+{{/authed}}
