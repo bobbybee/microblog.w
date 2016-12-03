@@ -3,9 +3,9 @@ handleGET(url, session, fs, db) = dispatch(url):
     "/profile/{username}" -> profile(session, db, db.users[username]).mustache(fs.profile)
     "/login"              -> fs.login
 
-handlePOST(url, session, fs, db, query) = dispatch(url):
+handlePOST(url, session, fs, db, query, date) = dispatch(url):
     "/login"              -> login(query, session, db)
-    "/think"              -> think(session.user, query)
+    "/think"              -> think(session.user, query, date)
     "/bio"                -> changeBio(session.user, query)
     "/follow"             -> follow(session.user, query)
     "/unfollow"           -> unfollow(session.user, query)
@@ -35,7 +35,7 @@ login(q, sess, db) = if validAuth(q, db): sess.set(user = db.users[q.username])
 
 validAuth(query, db) = db.users[query.username].password == hash(query.password)
 
-think(me, query)     = me.thoughts.append(query)
+think(me, query, date)     = me.thoughts.append(query.set(date = date))
 changeBio(me, query) = me.set(bio = query.bio)
 
 follow(me, query)    = me.following.append(query.target)
