@@ -1,6 +1,6 @@
 <section id="about-box">
     <address class="author">
-        {{name}}
+        {{username}}
     </address>
 
     {{me}}
@@ -9,11 +9,25 @@
             <input type="submit"/>
         </form>
     {{/me}}
-    {{!me}}
+    {{^me}}
         <article class="bio">
             {{bio}}
         </article>
     {{/me}}
+
+    {{^me}}
+        {{following}}
+            <form action="/unfollow" method="post">
+                <input type="hidden" value="{{username}}">
+                <input type="submit" value="Unfollow"/>
+            </form>
+        {{/following}}
+        {{^following}}
+            <form action="/follow" method="post">
+                <input type="hidden" value="{{username}}">
+                <input type="submit" value="Follow"/>
+            </form>
+        {{/following}}
 </section>
 
 {{me}}
