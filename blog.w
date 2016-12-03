@@ -1,6 +1,7 @@
 handleGET(url, session, fs, db) = dispatch(url):
     "/profile/{username}" -> profile(session, username, db),
     "/login"              -> fs.login
+    "/"                   -> fs.home
 
 handlePOST(url, session, fs, db, query) = dispatch(url):
     "/login"              -> login(query, session, db)
