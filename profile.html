@@ -16,18 +16,12 @@
     {{/me}}
 
     {{^me}}
-        {{#following}}
-            <form action="/unfollow" method="post">
-                <input type="hidden" value="{{username}}">
-                <input type="submit" value="Unfollow"/>
+        {{#follow}}
+            <form action="{{action}}" method="post">
+                <input type="hidden" name="target" value="{{username}}">
+                <input type="submit" value="{{text}}"/>
             </form>
-        {{/following}}
-        {{^following}}
-            <form action="/follow" method="post">
-                <input type="hidden" value="{{username}}">
-                <input type="submit" value="Follow"/>
-            </form>
-        {{/following}}
+        {{^follow}}
     {{/me}}
 </section>
 
