@@ -3,9 +3,17 @@
         {{name}}
     </address>
 
-    <article class="bio">
-        {{bio}}
-    </article>
+    {{me}}
+        <form action="/bio" method="post">
+            <textarea name="bio">{{bio}}</textarea>
+            <input type="submit"/>
+        </form>
+    {{/me}}
+    {{!me}}
+        <article class="bio">
+            {{bio}}
+        </article>
+    {{/me}}
 </section>
 
 {{me}}
