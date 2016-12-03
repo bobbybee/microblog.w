@@ -6,4 +6,8 @@
 
 {{#authed}}
     Welcome, <a href="/profile/{{username}}">{{username}}</a>!
+
+    {{#feed}}
+        {{> thought}}
+    {{/feed}}
 {{/authed}}

@@ -1,7 +1,7 @@
 handleGET(url, session, fs, db) = dispatch(url):
-    "/profile/{username}" -> viewProfile(session, fs, db, db.users[username]),
+    "/"                   -> home(session, db).mustache(fs.home)
+    "/profile/{username}" -> profile(session, db, db.users[username]).mustache(fs.profile)
     "/login"              -> fs.login
-    "/"                   -> fs.home
 
 handlePOST(url, session, fs, db, query) = dispatch(url):
     "/login"              -> login(query, session, db)
@@ -10,7 +10,11 @@ handlePOST(url, session, fs, db, query) = dispatch(url):
     "/follow"             -> follow(session.user, query)
     "/unfollow"           -> unfollow(session.user, query)
 
-viewProfile(session, fs, db, user) = profile(session, db, user).mustache(fs.profile)
+home(session, db) = {
+    authed: session.user?,
+
+    feed: session.user.following.joinmap(s => s.thoughts)
+}
 
 profile(session, db, user) = {
     username: user.username, bio: user.bio,
