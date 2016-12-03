@@ -3,7 +3,7 @@
         {{username}}
     </address>
 
-    {{me}}
+    {{#me}}
         <form action="/bio" method="post">
             <textarea name="bio">{{bio}}</textarea>
             <input type="submit"/>
@@ -16,7 +16,7 @@
     {{/me}}
 
     {{^me}}
-        {{following}}
+        {{#following}}
             <form action="/unfollow" method="post">
                 <input type="hidden" value="{{username}}">
                 <input type="submit" value="Unfollow"/>
@@ -28,7 +28,12 @@
                 <input type="submit" value="Follow"/>
             </form>
         {{/following}}
+    {{/me}}
 </section>
+
+{{#followers}}
+    <a rel="author" href="/profile/{{username}}">{{username}}</a>
+{{/followers}}
 
 {{me}}
     <form action="/think" method="post">
