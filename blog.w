@@ -13,7 +13,7 @@ handlePOST(url, session, fs, db, query, date) = dispatch(url):
 home(session, db) = {
     authed: session.user?,
 
-    feed: session.user.following.joinmap(s => s.thoughts)
+    feed: session.user.following.joinmap(s => s.thoughts).sort(s => s.date).reverse
 }
 
 profile(session, db, user) = {
@@ -35,8 +35,8 @@ login(q, sess, db) = if validAuth(q, db): sess.set(user = db.users[q.username])
 
 validAuth(query, db) = db.users[query.username].password == hash(query.password)
 
-think(me, query, date)     = me.thoughts.append(query.set(date = date))
-changeBio(me, query) = me.set(bio = query.bio)
+think(me, query, date) = me.thoughts.append(query.set(date = date))
+changeBio(me, query)   = me.set(bio = query.bio)
 
 follow(me, query)    = me.following.append(query.target)
 unfollow(me, query)  = me.following.remove(query.target)
