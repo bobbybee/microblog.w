@@ -5,19 +5,18 @@ handleGET(url, session, fs, db) = dispatch(url):
 
 handlePOST(url, session, fs, db, query) = dispatch(url):
     "/login"              -> login(query, session, db)
-    "/think"              -> think(query, session, db)
-    "/bio"                -> changeBio(session, db)
+    "/think"              -> think(db.users[session.username], query)
+    "/bio"                -> changeBio(db.users[session.username], query)
 
 profile(username, session, db) = db.users[username].mustache(fs.profile)
 
-login(query, session, db) = if validAuth(query, db)
-    then session.set(username = query.username).then(profile(session.username))
-    else "Bad login"
+login(q, sess, db) = if validAuth(q, db): sess.set(username = q.username)
+                                              .then(profile(sess.username))
+                     else:                "Bad login"
 
-validAuth(query, db) = db.users[query.username]
-                    && hash(query.password) == db.users[query.username]
+validAuth(query, db) = db.users[query.username].password == hash(query.password)
 
-think(session, db, query)     = db.users[session.username].thoughts.append(query)
-changeBio(session, db, query) = db.users[session.username].update(bio = query.bio)
+think(me, query)     = me.thoughts.append(query)
+changeBio(me, query) = me.set(bio = query.bio)
 
 serve_http(get = handleGET, post = handlePOST)
