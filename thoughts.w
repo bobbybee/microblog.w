@@ -24,6 +24,10 @@ controller Session {
     user(string password)? -> user.password == hash(password);
 }
 
+controller User {
+    password(string p) = hash(p);
+}
+
 controller Thought {
     author(Session s) = s.user;
     date(Date d)      = d;
