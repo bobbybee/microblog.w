@@ -1,10 +1,5 @@
-model Database {
-    User[] users;
-}
-
-model Session {
-    User user;
-}
+model Database -- User[] users;
+model Session -- User user;
 
 model User {
     string username    readonly;
