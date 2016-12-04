@@ -4,8 +4,8 @@
     </address>
 
     {{#me}}
-        <form action="/bio" method="post">
-            <textarea name="bio">{{bio}}</textarea>
+        <form action="/session/user/bio/set" method="post">
+            <textarea name="value">{{bio}}</textarea>
             <input type="submit"/>
         </form>
     {{/me}}
@@ -30,8 +30,8 @@
 {{/followers}}
 
 {{me}}
-    <form action="/think" method="post">
-        <p><textarea name="body" placeholder="WINGS is cool..."></textarea></p>
+    <form action="/session/user/thoughts/insert" method="post">
+        <p><textarea name="value" placeholder="WINGS is cool..."></textarea></p>
         <p><input type="submit"/></p>
     </form>
 {{/me}}

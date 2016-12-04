@@ -38,7 +38,7 @@ validAuth(query, db) = db.users[query.username].password == hash(query.password)
 think(me, query, date) = me.thoughts.append(query.set(date = date))
 changeBio(me, query)   = me.set(bio = query.bio)
 
-follow(me, query)    = me.following.append(query.target)
+follow(me, query)    = me.following.insert(query.target)
 unfollow(me, query)  = me.following.remove(query.target)
 
 serve_http(get = handleGET, post = handlePOST)
