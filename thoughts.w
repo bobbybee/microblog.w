@@ -2,16 +2,16 @@ model Database -- User[] users;
 model Session -- User user;
 
 model User {
-    string username    readonly;
+    string username    readonly unique;
     string password    self private;
 
     string bio         self;
 
     User[] following   self;
-    User[] followers  : Users.filter(u => u.following.has(this));
+    User[] followers : Users.filter(u => u.following.has(this));
 
     Thought[] thoughts self;
-    Thought[] feed    : following.map(thoughts).sort(date).reverse;
+    Thought[] feed   : following.map(thoughts).sort(date).reverse;
 }
 
 model Thought {
