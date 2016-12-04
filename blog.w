@@ -23,8 +23,8 @@ profile(session, db, user) = {
     authed: session.user?, me: user == session.user,
 
     follow: {
-        action: "/follow" if session.user.following.has(user) else "/unfollow",
-        text:   "Follow"  if session.user.following.has(user) else "Unfollow",
+        action: "/session/user/following/insert" if session.user.following.has(user) else "/session/user/following/remove",
+        text:   "Follow" if session.user.following.has(user) else "Unfollow",
         target: user.username
     }
 }
