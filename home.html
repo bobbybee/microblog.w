@@ -1,13 +1,15 @@
 <h1>WINGS thoughts homepage</h1>
 
-{{^authed}}
-    <a href="/login">Login</a>
-{{/authed}}
+{{#session}}
+    {{^user}}
+        <a href="/login">Login</a>
+    {{/user}}
+    
+    {{#user}}
+        Welcome, <a href="/profile/{{username}}">{{username}}</a>!
 
-{{#authed}}
-    Welcome, <a href="/profile/{{username}}">{{username}}</a>!
-
-    {{#feed}}
-        {{> thought}}
-    {{/feed}}
-{{/authed}}
+        {{#feed}}
+            {{> thought}}
+        {{/feed}}
+    {{/user}}
+{{/session}}

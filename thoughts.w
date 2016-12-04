@@ -7,9 +7,10 @@ model User {
     string password    self private;
 
     User[] following   self;
-    User[] followers : Users.filter(u => u.following.has(this))
+    User[] followers  : Users.filter(u => u.following.has(this));
 
     Thought[] thoughts self;
+    Thought[] feed    : following.map(u => u.thoughts).sort(t => t.date).reverse;
 }
 
 model Thought {
@@ -19,7 +20,7 @@ model Thought {
 }
 
 controller Session {
-    user(string password)? -> user.password == hash(password)
+    user(string password)? -> user.password == hash(password);
 }
 
 controller Thought {
