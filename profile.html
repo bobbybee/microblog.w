@@ -16,22 +16,20 @@
     {{/me}}
 
     {{^me}}
-        {{#follow}}
-            <form action="{{action}}" method="post">
-                <input type="hidden" name="target" value="{{target}}">
-                <input type="submit" value="{{text}}"/>
-            </form>
-        {{^follow}}
+        <form action="/session/user/followers/toggle" method="post">
+            <input type="hidden" name="target" value="{{username}}">
+            <input type="submit" value="{{follow-text}}"/>
+        </form>
     {{/me}}
 </section>
 
 {{#followers}}
-    <a rel="author" href="/profile/{{username}}">{{username}}</a>
+    <a rel="author" href="/users/{{username}}">{{username}}</a>
 {{/followers}}
 
 {{me}}
     <form action="/session/user/thoughts/insert" method="post">
-        <p><textarea name="value" placeholder="WINGS is cool..."></textarea></p>
+        <p><textarea name="body" placeholder="WINGS is cool..."></textarea></p>
         <p><input type="submit"/></p>
     </form>
 {{/me}}

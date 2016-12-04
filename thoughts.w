@@ -10,11 +10,13 @@ model User {
     string username    readonly;
     string password    self private;
 
+    string bio         self;
+
     User[] following   self;
     User[] followers  : Users.filter(u => u.following.has(this));
 
     Thought[] thoughts self;
-    Thought[] feed    : following.map(u => u.thoughts).sort(t => t.date).reverse;
+    Thought[] feed    : following.map(thoughts).sort(date).reverse;
 }
 
 model Thought {
@@ -30,4 +32,8 @@ controller Session {
 controller Thought {
     author(Session s) = s.user;
     date(Date d)      = d;
+}
+
+view User {
+    string follow-text(Session s) = s.user.following.has(this) ? "Unfollow" : "Follow";
 }
