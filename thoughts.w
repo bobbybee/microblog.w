@@ -1,3 +1,7 @@
+model Database {
+    User[] users;
+}
+
 model Session {
     User user;
 }
