@@ -17,12 +17,14 @@ model User {
 
     Thought[] thoughts self;
     Thought[] feed   : following.map(thoughts).sort(date).reverse;
+}
 
-    string follow-test(Session s) : s.user.following.has(this) ? "Unfollow" : "Follow";
+view User(Session s) {
+    string follow-test : s.user.following.has(this) ? "Unfollow" : "Follow";
 }
 
 model Thought {
     User author  readonly (Session s) : s.user;
-    string body  readonly (Date d)    : d;
-    Date date    readonly;
+    string body  readonly   ;
+    Date date    readonly (Date d)    : d;
 }
