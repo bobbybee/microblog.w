@@ -12,7 +12,7 @@ model User {
     User[] followers : Users.filter(following.has(this));
 
     Thought[] thoughts;
-    Thought[] feed : user.following.map(thoughts).sort(date).reverse;
+    Thought[] feed : following.thoughts.sort(date).reverse;
 }
 
 view User(Session s) {
