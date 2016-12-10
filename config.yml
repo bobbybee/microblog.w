@@ -1,0 +1,14 @@
+---
+database:
+    backend: mysql
+    username: root
+    password: toor
+    ip: localhost
+    class: Database
+
+web:
+    rest: on
+    html: mustache
+    https: force
+    session:
+        class: Session
