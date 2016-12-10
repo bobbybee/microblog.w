@@ -18,7 +18,12 @@
     {{^me}}
         <form action="/session/user/followers/toggle" method="post">
             <input type="hidden" name="target" value="{{username}}">
-            <input type="submit" value="{{follow-text}}"/>
+            {{#following}}
+                <input type="submit" value="Unfollow"/>
+            {{/following}}
+            {{^following}}
+                <input type="submit" value="Follow"/>
+            {{/following}}
         </form>
     {{/me}}
 </section>
