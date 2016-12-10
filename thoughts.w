@@ -1,7 +1,7 @@
 model Database -- User[] users appendonly;
 
 model  Session -- User user nowrite;
-verify Session -- user write(string pass) => user.password == hash(pass);
+verify Session -- user write(string pass) : user.password == hash(pass);
 
 model User {
     string username    readonly unique;
