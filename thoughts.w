@@ -5,9 +5,8 @@ controller Session -- user write(string pass) => user.passHash == hash(pass);
 
 model User {
     string username    readonly unique;
-
     string password    destroy;
-    string passHash    private : hash(p);
+    string passHash    private : hash(password);
 
     string bio         self;
 
