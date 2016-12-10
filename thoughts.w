@@ -17,9 +17,7 @@ model User {
     Thought[] feed   : following.map(thoughts).sort(date).reverse;
 }
 
-view User {
-    string follow-test : Session.user.following.has(this) ? "Unfollow" : "Follow";
-}
+view User -- string followText : followers.has(Session.user) ? "Unfollow" : "Follow";
 
 model Thought {
     User author  readonly : owner.user;
