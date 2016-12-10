@@ -25,8 +25,7 @@ view User(Session s) {
     string follow-test : s.user.following.has(this) ? "Unfollow" : "Follow";
 }
 
-model Thought(Session creator) {
+model Thought (Session creator, Date date) {
     User author  readonly : creator.user;
     string body  readonly;
-    Date date    readonly (Date d)    : d;
 }
