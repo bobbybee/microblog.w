@@ -8,7 +8,9 @@ model Session {
 
 model User {
     string username    readonly unique;
-    string password    self private (string p) : hash(p);
+
+    string password    destroy;
+    string passHash    private : hash(p);
 
     string bio         self;
 
@@ -23,8 +25,8 @@ view User(Session s) {
     string follow-test : s.user.following.has(this) ? "Unfollow" : "Follow";
 }
 
-model Thought {
-    User author  readonly (Session s) : s.user;
-    string body  readonly   ;
+model Thought(Session creator) {
+    User author  readonly : creator.user;
+    string body  readonly;
     Date date    readonly (Date d)    : d;
 }
