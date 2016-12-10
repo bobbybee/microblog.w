@@ -11,7 +11,7 @@ model User {
     string bio         self;
 
     User[] following   self;
-    User[] followers : Users.filter(u => u.following.has(this));
+    User[] followers : Users.filter(following.has(this));
 
     Thought[] thoughts self;
     Thought[] feed   : following.map(thoughts).sort(date).reverse;
