@@ -9,7 +9,7 @@ model User {
     string bio;
 
     User[] following;
-    User[] followers : Users.filter(following.has(this));
+    User[] followers : Users[following.has(this))];
 
     Thought[] thoughts;
     Thought[] feed : following.thoughts.sort(date).reverse;
