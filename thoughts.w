@@ -21,8 +21,8 @@ model User {
     Thought[] feed   : following.map(thoughts).sort(date).reverse;
 }
 
-view User (Session s) {
-    string follow-test : s.user.following.has(this) ? "Unfollow" : "Follow";
+view User {
+    string follow-test : Session.user.following.has(this) ? "Unfollow" : "Follow";
 }
 
 model Thought {
