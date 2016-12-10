@@ -8,7 +8,9 @@ database:
 
 web:
     rest: on
-    html: mustache
+    html:
+        engine: mustache
+        search: "templates/"
     https: force
     session:
         class: Session

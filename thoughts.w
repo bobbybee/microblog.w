@@ -1,13 +1,11 @@
 model Database -- User[] users appendonly;
 
-model      Session -- User user nowrite;
-controller Session -- user write(string pass) => user.passHash == hash(pass);
+model  Session -- User user nowrite;
+verify Session -- user write(string pass) => user.password == hash(pass);
 
 model User {
     string username    readonly unique;
-    string password    destroy;
-    string passHash    private : hash(password);
-
+    string password  : hash(password);
     string bio         self;
 
     User[] following   self;
