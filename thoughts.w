@@ -4,8 +4,8 @@ model  Session -- User user nowrite;
 verify Session -- user write(string pass) : user.password == hash(pass);
 
 model User {
-    string username    readonly unique;
-    string password  : hash(password);
+    string username readonly unique;
+    string password private : hash(password);
     string bio;
 
     User[] following;
@@ -16,8 +16,8 @@ model User {
 }
 
 view User(Session s) {
-    bool me         : this == s;
-    bool following  : followers.has(s.user);
+    bool me        : this == s;
+    bool following : followers.has(s.user);
 } 
 
 model Thought {
