@@ -4,8 +4,8 @@ model  Session -- User user;
 verify Session -- write user(string pass) : user.password == hash(pass);
 
 model User {
-    string username   const unique;
-    string password : password.hash;
+    string username const unique;
+    string password private : password.hash;
     string bio;
 
     User[] following;
