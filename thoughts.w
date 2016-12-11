@@ -5,7 +5,7 @@ verify Session -- write user(string pass) : user.password == hash(pass);
 
 model User {
     string username   const unique;
-    string password : hash(password);
+    string password : password.hash;
     string bio;
 
     User[] following;
