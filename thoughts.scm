@@ -1,3 +1,4 @@
+(struct session (user))
 (struct user (username password bio following thoughts))
 (struct thought (author body date))
 
@@ -9,18 +10,14 @@
        (user-following user)))
 
 (define (view-user user session)
-  (hash 'username   (user-username user)
-        'bio        (user-bio user)
-        'following  (user-following user)
-        'followers  (user-followers user)
-        'thoughts   (user-thoughts user)
-        'me         (eq? user session)
-        'following? (has? (user-following session) user)))
+  (view-extend user        '(username bio following followers thoughts)
+               'me         (eq? user session)
+               'following? (has? (user-following session) user)))
 
 (define (new-thought session body)
   (thought session body (date)))
 
-(define (verify-login user password)
+(define (verify-session-user-set user password)
   (= (user-password user) (secure-hash password)))
 
 (map (ror-style-server (user thought) "config.yml") (http-requests 80))
